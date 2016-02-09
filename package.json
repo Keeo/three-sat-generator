@@ -1,6 +1,6 @@
 {
   "name": "three-sat-generator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Generates seedable weiughtable 3 sat",
   "main": "src/three-sat-generator.js",
   "scripts": {

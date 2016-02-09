@@ -10,7 +10,7 @@ export default class Sat {
     this.weights = weights;
     this.seed = seed;
     this.order = order;
-    this.id = `${seed}-${order}`;
+    this.id = `${seed}-${order}-${this.variableCount}`;
   }
 
   solve(values) {
@@ -53,5 +53,9 @@ export default class Sat {
     const variable = this.variables[position];
     const value = values[abs(variable) - 1];
     return sign(variable) === 1 ? value : !value;
+  }
+
+  toString() {
+    return this.id + ' - ' + this.variablesToString().replace(/ /g,'');
   }
 }
