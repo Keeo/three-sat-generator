@@ -10,6 +10,7 @@ export default class Sat {
     this.weights = weights;
     this.seed = seed;
     this.order = order;
+    this.id = `${seed}-${order}`;
   }
 
   solve(values) {
@@ -21,7 +22,7 @@ export default class Sat {
     for (let i = 0; i < this.variables.length; i = i + 3) {
       evaluation = evaluation && (this._evaluate(values, i) || this._evaluate(values, i + 1) || this._evaluate(values, i + 2));
     }
-    return evaluation ? this._weightSum(values) : false;
+    return evaluation ? this.weight(values) : false;
   }
 
   variablesToString() {
@@ -40,7 +41,11 @@ export default class Sat {
     return (variable > 0 ? '' : '!') + String.fromCharCode(97 + abs(variable) - 1);
   }
 
-  _weightSum(values) {
+  /**
+   * @param {Array} values
+   * @returns {number}
+   */
+  weight(values) {
     return this.weights.reduce((prev, current, index) => prev + (values[index] ? current : 0), 0);
   }
 

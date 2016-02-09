@@ -17,15 +17,23 @@ export default class ThreeSatGenerator {
     this.count = 0;
   }
 
+  generate(variableCount, clauseCount, count = 50) {
+    const sats = [];
+    for (let i = 0; i < count; ++i) {
+      sats.push(this.getThreeSat(variableCount, clauseCount));
+    }
+    return sats;
+  }
+
   /**
-   * @param clauseCount
    * @param {number} variableCount
+   * @param {number} clauseCount
    * @param {Object} weightRange
    * @param {number} [weightRange.min=1]
    * @param {number} [weightRange.max=10]
    * @returns {Sat}
    */
-  getThreeSat(clauseCount, variableCount, weightRange = {min: 1, max: 10}) {
+  getThreeSat(variableCount, clauseCount, weightRange = {min: 1, max: 10}) {
     const variables = [];
     for (let i = 0; i < clauseCount * 3; ++i) {
       const sign = this.generator.random_int() % 2 ? 1 : -1;
